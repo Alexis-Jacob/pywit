@@ -112,7 +112,9 @@ class Wit:
                 'text': json.get('msg').encode('utf8'),
                 'quickreplies': json.get('quickreplies'),
             }
-            self.actions['send'](request, response)
+            msg = self.actions['send'](request, response)
+	    if msg is not None:
+		context = msg
         elif json['type'] == 'action':
             action = json['action']
             self.throw_if_action_missing(action)
